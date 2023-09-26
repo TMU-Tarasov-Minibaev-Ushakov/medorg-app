@@ -1,0 +1,52 @@
+<mxfile host="app.diagrams.net" modified="2023-09-26T17:16:33.331Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" etag="Fn8F7p0eHqg8bMaTk6JN" version="21.8.2" type="google">
+  <diagram name="Page-1" id="13e1069c-82ec-6db2-03f1-153e76fe0fe0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="1_Jp0-C2UlG4pubfzhy_-9" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Object:Patient&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;userId: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;medicalCardId: number&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="330" y="330" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Jp0-C2UlG4pubfzhy_-14" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Object:LoginInformation&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;email: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;password: string&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="210" y="220" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Jp0-C2UlG4pubfzhy_-16" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Object:UserRegistrationInformation&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;email: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;password: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;phone: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;firstName: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;secondName: string&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="750" y="130" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Jp0-C2UlG4pubfzhy_-17" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Object:Doctor&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;userId: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;job: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;specialization: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;workExpirience: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;degree: string&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="520" y="330" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Jp0-C2UlG4pubfzhy_-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="1_Jp0-C2UlG4pubfzhy_-17" target="1_Jp0-C2UlG4pubfzhy_-18">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="650" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1_Jp0-C2UlG4pubfzhy_-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.293;entryY=1.007;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="1_Jp0-C2UlG4pubfzhy_-9" target="1_Jp0-C2UlG4pubfzhy_-18">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1_Jp0-C2UlG4pubfzhy_-18" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Object:User&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;id: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;username: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;email: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;role: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;passwordHash: string&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="440" y="160" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Jp0-C2UlG4pubfzhy_-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="1_Jp0-C2UlG4pubfzhy_-19" target="1_Jp0-C2UlG4pubfzhy_-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Jp0-C2UlG4pubfzhy_-19" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Object:DoctorRegistrationInformation&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 8px;&quot;&gt;job: string&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 8px;&quot;&gt;specialization: string&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 8px;&quot;&gt;workExpirience: int&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 8px;&quot;&gt;degree: string&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="750" y="280" width="270" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Jp0-C2UlG4pubfzhy_-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.021;entryY=0.416;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="1_Jp0-C2UlG4pubfzhy_-14" target="1_Jp0-C2UlG4pubfzhy_-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Jp0-C2UlG4pubfzhy_-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="1_Jp0-C2UlG4pubfzhy_-16" target="1_Jp0-C2UlG4pubfzhy_-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="190" />
+              <mxPoint x="700" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
