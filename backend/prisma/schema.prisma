@@ -1,0 +1,31 @@
+// Config
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Models
+
+model Permission {
+  name String @id @unique
+  permissionGroups PermissionGroup[]
+  users User[]
+}
+
+model PermissionGroup {
+  name String @id @unique
+  permissions Permission[]
+  users User[]
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  permissionGroups PermissionGroup[]
+  permissions Permission[]
+}
