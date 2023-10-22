@@ -8,25 +8,31 @@
     "build": "npm run clean && tsc",
     "start": "npm run build && node dist/index.js",
     "dev": "concurrently \"tsc --watch\" \"nodemon -q dist/index.js\"",
-    "docker:setup": "docker create --name medorg-db --env-file ./.env -p \"5432:5432\" postgres",
-    "docker:start": "docker start medorg-db",
-    "docker:stop": "docker stop medorg-db",
+    "db:setup": "docker create --name medorg-db --env-file ./.env -p \"5432:5432\" postgres",
+    "db:start": "docker start medorg-db",
+    "db:stop": "docker stop medorg-db",
     "prisma:studio": "prisma studio"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.4.1",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.18",
+    "@types/jsonwebtoken": "^9.0.3",
     "@types/node": "^20.8.3",
     "concurrently": "^8.2.1",
     "nodemon": "^3.0.1",
     "prisma": "^5.4.1",
     "rimraf": "^5.0.5",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }
 }
