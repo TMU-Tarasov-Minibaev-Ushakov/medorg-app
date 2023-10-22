@@ -28,4 +28,5 @@ model User {
   email String @unique
   permissionGroups PermissionGroup[]
   permissions Permission[]
+  passwordHash String?
 }

@@ -1,18 +1,26 @@
 import express from 'express';
-import { configDotenv } from 'dotenv';
-import { PrismaClient } from '@prisma/client';
-import { getUser, getUsers } from './db/db';
-
-configDotenv();
-const port = process.env.SERVER_PORT || 9999;
+import { getUsers, getUser } from './db/user';
+import { authRouter } from './routes/auth/auth.router';
+import { env } from './env';
+import { createPermissionsValidator } from './helpers/createPermissionsValidator';
+import { PermissionName } from './types';
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Express + TypeScript Server');
+// parse requests of content-type - application/json
+app.use(express.json());
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({
+  extended: true
+}));
+
+app.use(authRouter);
+
+app.get('/ping', (req, res) => {
+  res.send('pong!');
 });
 
-app.get('/users', async (req, res) => {
+app.get('/users', createPermissionsValidator([PermissionName.viewUsers]), async (req, res) => {
   const users = await getUsers();
   res.json(users)
 })
@@ -23,6 +31,6 @@ app.get('/user/:id', async (req, res) => {
   res.json(user)
 })
 
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
+app.listen(env.SERVER_PORT, () => {
+  console.log(`[server]: Server is running at http://localhost:${env.SERVER_PORT}`);
 });
