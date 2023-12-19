@@ -3,6 +3,7 @@ Here's a Python endpoint using Werkzeug that utilizes your PyTorch model, prepro
 
 Key points:
 
+For the first, you need place your pytorch model to models directory
 This endpoint only accepts POST requests.
 Image data is expected in the image file field of the request.
 The model is downloaded if not already present.
