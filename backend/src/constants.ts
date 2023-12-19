@@ -6,3 +6,7 @@ export enum PermissionName {
   viewPermissions = 'viewPermissions',
   viewUsers = 'viewUsers'
 }
+
+export enum PermissionGroup {
+  admin = 'admin'
+}
