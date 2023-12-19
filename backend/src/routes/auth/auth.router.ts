@@ -5,6 +5,7 @@ import { authMiddleware } from "./middlewares/auth.middleware";
 import { createRequestValidator } from "../../helpers/createRequestValidator";
 import { registerSchema } from "./handlers/sign-up/register.schema";
 import { loginSchema } from "./handlers/sign-in/login.schema";
+import { checkAuth } from "../../helpers/checkAuth";
 
 const namespace = '/auth';
 export const authRouter = Router();
@@ -14,7 +15,7 @@ authRouter.use(authMiddleware)
 authRouter.post(`${namespace}/sign-up`, createRequestValidator(registerSchema), signUpHandler);
 authRouter.post(`${namespace}/sign-in`, createRequestValidator(loginSchema), signInHandler);
 
-authRouter.post(`${namespace}/test`, (req, res) => {
+authRouter.post(`${namespace}/test`, checkAuth, (req, res) => {
   console.log(req.user)
   res.json({
     status: 'ok'

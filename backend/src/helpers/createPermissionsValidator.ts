@@ -7,7 +7,7 @@ export function createPermissionsValidator(permissions: string[]) {
   return async (req: Request, res: Response, next: NextFunction) => {
     
     if (!req.user) return res.status(403).json({
-      message: 'Please log in to see this page'
+      message: 'User is not authenticated'
     })
 
     const { id } = req.user;
