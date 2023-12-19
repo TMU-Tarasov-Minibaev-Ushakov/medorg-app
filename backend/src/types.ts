@@ -1,10 +1,9 @@
-import { User } from "@prisma/client";
-import { JwtPayload } from "jsonwebtoken";
+import { GetUserReturn } from "./db/user/types";
 
 declare global {
   namespace Express {
     export interface Request {
-      user?: UserFromJWT;
+      user?: GetUserReturn;
     }
   }
 }
@@ -17,13 +16,4 @@ export type RegistrationData = {
 export type UserFromJWT = {
   id: number,
   email: string
-}
-
-export enum PermissionName {
-  editPermissionGroups = 'editPermissionGroups',
-  editPermissions = 'editPermissions',
-  editUsers = 'editUsers',
-  viewPermissionGroups = 'viewPermissionGroups',
-  viewPermissions = 'viewPermissions',
-  viewUsers = 'viewUsers'
 }

@@ -1,13 +1,31 @@
 import { NextFunction, Request, Response } from "express";
 import { verifyToken } from "../../../auth";
+import { getUser } from "../../../db/user";
+import { handleErrorAndRespond } from "../../../helpers/handleErrorAndResponde";
 
-export function authMiddleware(req: Request, res: Response, next: NextFunction) {
-  
-  const token = req.headers['authorization'];
+export async function authMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const token = req.headers["authorization"];
 
-  if (!token) return next();
+  if (!token) {
+    return next();
+  }
 
-  req.user = verifyToken(token);
-  next();
+  try {
+    const user = verifyToken(token);
+    const userFromDb = await getUser(user.id);
 
+    console.log(userFromDb)
+    if (userFromDb) {
+      req.user = userFromDb;
+    }
+
+    next();
+
+  } catch (error) {
+    handleErrorAndRespond(error, res);
+  }
 }

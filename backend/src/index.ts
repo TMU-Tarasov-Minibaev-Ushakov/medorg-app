@@ -3,7 +3,7 @@ import { getUsers, getUser } from './db/user';
 import { authRouter } from './routes/auth/auth.router';
 import { env } from './env';
 import { createPermissionsValidator } from './helpers/createPermissionsValidator';
-import { PermissionName } from './types';
+import { PermissionName } from './constants';
 
 const app = express();
 
