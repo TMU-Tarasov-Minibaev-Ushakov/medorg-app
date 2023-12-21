@@ -12,7 +12,10 @@ export async function signUpHandler(req: Request, res: Response) {
     })
     
     res.status(200).json({
-      createdUser
+      createdUser: {
+        id: createdUser.id,
+        email: createdUser.email
+      }
     }) 
 
   } catch (error) {

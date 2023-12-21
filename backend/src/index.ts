@@ -4,9 +4,13 @@ import { authRouter } from './routes/auth/auth.router';
 import { env } from './env';
 import { createPermissionsValidator } from './helpers/createPermissionsValidator';
 import { PermissionName } from './constants';
+import cors from 'cors';
 
 const app = express();
 
+app.use(cors({
+  origin: '*'
+}))
 // parse requests of content-type - application/json
 app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -14,6 +18,10 @@ app.use(express.urlencoded({
   extended: true
 }));
 
+// app.use((req, res, next) => {
+//   console.log(req)
+//   next()
+// })
 app.use(authRouter);
 
 app.get('/ping', (req, res) => {
