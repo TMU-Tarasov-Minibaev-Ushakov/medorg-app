@@ -10,12 +10,12 @@ import { checkAuth } from "../../helpers/checkAuth";
 const namespace = '/auth';
 export const authRouter = Router();
 
-authRouter.use(authMiddleware)
+authRouter.use(authMiddleware);
 
 authRouter.post(`${namespace}/sign-up`, createRequestValidator(registerSchema), signUpHandler);
 authRouter.post(`${namespace}/sign-in`, createRequestValidator(loginSchema), signInHandler);
 
-authRouter.post(`${namespace}/test`, checkAuth, (req, res) => {
+authRouter.get(`${namespace}/test`, checkAuth, (req, res) => {
   console.log(req.user)
   res.json({
     status: 'ok'

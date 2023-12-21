@@ -1,10 +1,10 @@
 export enum PermissionName {
-  editPermissionGroups = 'editPermissionGroups',
-  editPermissions = 'editPermissions',
-  editUsers = 'editUsers',
   viewPermissionGroups = 'viewPermissionGroups',
+  editPermissionGroups = 'editPermissionGroups',
   viewPermissions = 'viewPermissions',
-  viewUsers = 'viewUsers'
+  editPermissions = 'editPermissions',
+  viewUsers = 'viewUsers',
+  editUsers = 'editUsers',
 }
 
 export enum PermissionGroup {
