@@ -31,5 +31,5 @@ best_model, avg_train_losses, avg_val_losses = engine.fit(model,
 utils.save_model(
     model=best_model,
     target_dir="best_model",
-    model_name="BrainMRIBest.pt"
+    model_name="BrainMRIBest.pth"
 )
