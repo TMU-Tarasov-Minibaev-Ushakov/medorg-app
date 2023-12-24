@@ -1,0 +1,8 @@
+services:
+  web: 
+    build:
+      context: .
+      target: xray-server
+    stop_signal: SIGINT
+    ports: 
+      - '8000:8000'
