@@ -3,7 +3,7 @@ import { UserOutlined, EyeTwoTone, EyeInvisibleOutlined, KeyOutlined } from "@an
 import { notification, Space, Input, Flex, Button, Form } from "antd";
 import { useNavigate } from "react-router-dom";
 
-import { SignUpInput, signUp } from "../../api/Auth/signUp";
+import { SignUpInput, signUp } from "../../api/auth/signUp";
 
 import { AuthLayout } from "./components/AuthLayout/AuthLayout";
 import { FormContainer } from "./components/AuthLayout/FormContainer";

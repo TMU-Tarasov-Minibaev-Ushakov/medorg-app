@@ -9,7 +9,7 @@ import {
 
 import { useNavigate } from "react-router-dom";
 
-import { SignInInput, signIn } from "../../api/Auth/signIn";
+import { SignInInput, signIn } from "../../api/auth/signIn";
 
 import { AuthLayout } from "./components/AuthLayout/AuthLayout";
 import { FormContainer } from "./components/AuthLayout/FormContainer";

@@ -50,7 +50,11 @@ def application(request):
             response = Response()
             response.headers['Access-Control-Allow-Origin'] = '*'
             response.headers['Content-Type'] = 'application/json'
-            img_bytes = base64.b64decode(json.loads(request.data)['image'])
+            file = request.files['image']
+            if not file:
+                response.data = json.dumps({"error": "no image"})
+                return response
+            img_bytes = file.read()
             img = imageLoader(img_bytes)
             activation_map, predicted_class  = write_activations(img, model, acts)
 

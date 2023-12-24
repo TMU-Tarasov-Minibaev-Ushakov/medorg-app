@@ -1,31 +1,47 @@
-import axios, { AxiosResponse } from "axios";
-import { env } from "../../../env";
-import { mockedResponseImageData } from "./mockedResponseImageData";
+import {env} from "../../../env";
+import FormData from "form-data";
+import { request } from "http";
 
 type XRayAnalysisResponse = {
-  predicted_class: string;
-  processed_image: string;
+    predicted_class: string;
+    processed_image: string;
 };
 
-export async function analyzeXRayImageBuffer(imageData: Buffer) {
-  const response = await axios.post<any, AxiosResponse<XRayAnalysisResponse>>(
-    env.ML_API_URL,
-    {
-      image: imageData,
-    },
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+export async function analyzeXRayImageBuffer(imageFile: Buffer) {
+    try {
+        const analyzerUrl = env.ML_API_URL + "/xray";
+
+        const formData = new FormData();
+        formData.append("image", imageFile, "image.png");
+
+        // send post request with http to analyzerUrl with formData as body
+        const response = await new Promise<XRayAnalysisResponse>((resolve, reject) => {
+            const req = request(analyzerUrl, {
+                method: "POST",
+                headers: formData.getHeaders()
+            }, (res) => {
+                let data = "";
+                res.on("data", (chunk) => {
+                    data += chunk;
+                });
+                res.on("end", () => {
+                    try {
+                        resolve(JSON.parse(data));
+                    } catch (error) {
+                        reject(error);
+                    }
+                });
+            });
+            req.on("error", (error) => {
+                reject(error);
+            });
+            formData.pipe(req);
+        });
+        return response;
+
+    } catch
+        (error) {
+        console.error(error);
+        return null;
     }
-  )
-
-  if (response.data) {
-    return {
-      predictedClass: response.data.predicted_class,
-      processedImage: response.data.processed_image,
-    };
-  }
-
-  throw new Error("Something went wrong while processing the image");
 }

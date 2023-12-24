@@ -18,7 +18,7 @@ export async function authMiddleware(
     const user = verifyToken(token);
     const userFromDb = await getUser(user.id);
 
-    console.log(userFromDb);
+    // console.log(userFromDb);
     if (userFromDb) {
       req.user = userFromDb;
     }

@@ -29,4 +29,12 @@ model User {
   permissionGroups PermissionGroup[]
   permissions Permission[]
   passwordHash String?
+  uploadedImages ImageFile[]
+}
+
+model ImageFile {
+  id Int @id @default(autoincrement())
+  userId Int
+  uploadedBy User @relation(fields: [userId], references: [id])
+  binaryData Bytes
 }
