@@ -68,7 +68,7 @@ def fit(model:torch.nn.Module,
             if show_samples:
                 with torch.no_grad():
                     if batch == 1:
-                        save_model(model, "models", "BrainMRIModel.pt")
+                        save_model(model, "models", "BrainMRIModel.pth")
 
                         model.eval()
 
