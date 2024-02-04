@@ -1,16 +1,38 @@
-import { prisma } from "..";
-import { CreateUserInput } from "./types";
+import {prisma} from "..";
+import {CreateUserInput} from "./types";
 
 export async function createUser(registrationData: CreateUserInput) {
-
-  const createdUser = await prisma.user.create({
+  return prisma.user.create({
     data: {
       email: registrationData.email,
-      passwordHash: registrationData.passwordHash
-    }
-  })
+      passwordHash: registrationData.passwordHash,
+      type: registrationData.type,
+    },
+  });
+}
 
-  console.log(createdUser)
+export async function createUserWithPatient(registrationData: CreateUserInput) {
+  return prisma.user.create({
+    data: {
+      email: registrationData.email,
+      passwordHash: registrationData.passwordHash,
+      type: registrationData.type,
+      patient: {
+        create: {},
+      }
+    },
+  });
+}
 
-  return createdUser;
+export async function createUserWithDoctor(registrationData: CreateUserInput) {
+  return prisma.user.create({
+    data: {
+      email: registrationData.email,
+      passwordHash: registrationData.passwordHash,
+      type: registrationData.type,
+      doctor: {
+        create: {},
+      }
+    },
+  });
 }

@@ -6,12 +6,7 @@ export const getUser = (id: number) => {
       id
     }, 
     include: {
-      permissionGroups: {
-        include: {
-          permissions: true,
-        }
-      },
-      permissions: true
+      permissionGroups: true,
     }
   });
 }

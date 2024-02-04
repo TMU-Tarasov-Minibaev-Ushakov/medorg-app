@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { getUser } from "../db/user";
-import { Permission } from "@prisma/client";
 
 export function createPermissionsValidator(permissions: string[]) {
   
@@ -28,14 +27,10 @@ export function createPermissionsValidator(permissions: string[]) {
 
 type PermissionGroupWithPermissions = {
   name: string,
-  permissions: {
-      name: string;
-  }[]
+  permissions: string[]
 }
 
-function flatPermissions(permissionGroups: PermissionGroupWithPermissions[] = [], permissions: Permission[] = []) {
-  const permissionNamesFromGroups = permissionGroups.map(g => g.permissions).flat().map(p => p.name);
-  const permissionNames = permissions.map(p => p.name);
-  const allPermissionNames = [...new Set([...permissionNamesFromGroups, ...permissionNames])];
-  return allPermissionNames;
+function flatPermissions(permissionGroups: PermissionGroupWithPermissions[] = [], permissions: string[] = []) {
+  const permissionNamesFromGroups = permissionGroups.map(g => g.permissions).flat();
+  return [...new Set([...permissionNamesFromGroups, ...permissions])];
 }

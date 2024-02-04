@@ -3,20 +3,11 @@ import { PermissionGroup, PermissionName } from '../src/constants'
 const prisma = new PrismaClient()
 
 async function main() {
-  await prisma.permission.createMany({
-    data: Object.values(PermissionName).map(permissionName => ({
-      name: permissionName
-    }))
-  })
 
   await prisma.permissionGroup.create({
     data: {
       name: PermissionGroup.admin,
-      permissions: {
-        connect: Object.values(PermissionName).map(permissionName => ({
-          name: permissionName
-        }))
-      }
+      permissions: Object.values(PermissionName)
     }
   })
 }

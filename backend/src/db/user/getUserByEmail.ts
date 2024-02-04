@@ -6,12 +6,7 @@ export const getUserByEmail = (email: string) => {
       email
     },
     include: {
-      permissionGroups: {
-        include: {
-          permissions: true
-        }
-      },
-      permissions: true
+      permissionGroups: true,
     }
   });
 }

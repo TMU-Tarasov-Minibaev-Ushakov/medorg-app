@@ -11,30 +11,71 @@ datasource db {
 
 // Models
 
-model Permission {
-  name String @id @unique
-  permissionGroups PermissionGroup[]
-  users User[]
-}
-
 model PermissionGroup {
-  name String @id @unique
-  permissions Permission[]
-  users User[]
+  name        String       @id @unique
+  permissions String[]
+  users       User[]
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  email String @unique
+  id               Int               @id @default(autoincrement())
+  email            String            @unique
+  type             String            @default("patient")
   permissionGroups PermissionGroup[]
-  permissions Permission[]
-  passwordHash String?
-  uploadedImages ImageFile[]
+  permissions      String[]
+  passwordHash     String?
+  uploadedImages   ImageFile[]
+  patient          Patient?
+  doctor           Doctor?
+  conversations    Conversation[]
+}
+
+model Patient {
+  id           Int           @id @default(autoincrement())
+  userId       Int           @unique
+  user         User          @relation(fields: [userId], references: [id])
+  appointments Appointment[]
+}
+
+model Doctor {
+  id           Int           @id @default(autoincrement())
+  userId       Int           @unique
+  user         User          @relation(fields: [userId], references: [id])
+  appointments Appointment[]
 }
 
 model ImageFile {
-  id Int @id @default(autoincrement())
-  userId Int
-  uploadedBy User @relation(fields: [userId], references: [id])
-  binaryData Bytes
+  id               Int       @id @default(autoincrement())
+  userId           Int
+  uploadedBy       User      @relation(fields: [userId], references: [id])
+  binaryData       Bytes
+  messagesWithFile Message[]
+}
+
+model Appointment {
+  id        Int     @id @default(autoincrement())
+  patientId Int
+  patient   Patient @relation(fields: [patientId], references: [id])
+  doctorId  Int
+  doctor    Doctor  @relation(fields: [doctorId], references: [id])
+  date      String
+  hour      Int
+  status    String
+}
+
+model Conversation {
+  id           Int       @id @default(autoincrement())
+  messages     Message[]
+  participants User[]
+}
+
+model Message {
+  id             Int          @id @default(autoincrement())
+  conversationId Int
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  senderId       Int
+  content        String
+  includedFileId Int?
+  includedFile   ImageFile?   @relation(fields: [includedFileId], references: [id])
+  createdAt      DateTime
 }

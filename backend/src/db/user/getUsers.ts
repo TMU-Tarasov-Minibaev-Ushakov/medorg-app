@@ -1,15 +1,9 @@
-import { prisma } from "..";
+import {prisma} from "..";
 
 export async function getUsers() {
-  const users = await prisma.user.findMany({
+  return prisma.user.findMany({
     include: {
-      permissionGroups: {
-        include: {
-          permissions: true
-        }
-      },
-      permissions: true
+      permissionGroups: true,
     }
   });
-  return users;
 }
