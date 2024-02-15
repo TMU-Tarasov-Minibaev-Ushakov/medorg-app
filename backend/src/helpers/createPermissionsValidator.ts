@@ -1,7 +1,9 @@
-import { NextFunction, Request, Response } from "express";
-import { getUser } from "../db/user";
+import {NextFunction, Request, Response} from "express";
+import {getUser} from "../db/user";
+import {PermissionName} from "../constants";
+import {flatPermissions} from "./flatPermissions";
 
-export function createPermissionsValidator(permissions: string[]) {
+export function createPermissionsValidator(permissions: PermissionName[]) {
   
   return async (req: Request, res: Response, next: NextFunction) => {
     
@@ -23,14 +25,4 @@ export function createPermissionsValidator(permissions: string[]) {
     next();
   }
 
-}
-
-type PermissionGroupWithPermissions = {
-  name: string,
-  permissions: string[]
-}
-
-function flatPermissions(permissionGroups: PermissionGroupWithPermissions[] = [], permissions: string[] = []) {
-  const permissionNamesFromGroups = permissionGroups.map(g => g.permissions).flat();
-  return [...new Set([...permissionNamesFromGroups, ...permissions])];
 }

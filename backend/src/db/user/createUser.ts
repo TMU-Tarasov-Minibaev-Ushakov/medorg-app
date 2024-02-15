@@ -1,12 +1,12 @@
 import {prisma} from "..";
-import {CreateUserInput} from "./types";
+import {CreateUserInput, UserType} from "./types";
 
 export async function createUser(registrationData: CreateUserInput) {
   return prisma.user.create({
     data: {
       email: registrationData.email,
       passwordHash: registrationData.passwordHash,
-      type: registrationData.type,
+      type: registrationData.type || UserType.PATIENT,
     },
   });
 }
@@ -16,7 +16,7 @@ export async function createUserWithPatient(registrationData: CreateUserInput) {
     data: {
       email: registrationData.email,
       passwordHash: registrationData.passwordHash,
-      type: registrationData.type,
+      type: UserType.PATIENT,
       patient: {
         create: {},
       }
@@ -29,7 +29,7 @@ export async function createUserWithDoctor(registrationData: CreateUserInput) {
     data: {
       email: registrationData.email,
       passwordHash: registrationData.passwordHash,
-      type: registrationData.type,
+      type: UserType.DOCTOR,
       doctor: {
         create: {},
       }

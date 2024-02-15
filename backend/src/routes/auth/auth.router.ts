@@ -5,6 +5,9 @@ import { createRequestValidator } from "../../helpers/createRequestValidator";
 import { registerSchema } from "./schemas/register.schema";
 import { loginSchema } from "./schemas/login.schema";
 import { checkAuth } from "../../helpers/checkAuth";
+import {createDoctorHandler} from "./handlers/create-doctor.handler";
+import {createPermissionsValidator} from "../../helpers/createPermissionsValidator";
+import {PermissionName} from "../../constants";
 
 const namespace = "/auth";
 export const authRouter = Router();
@@ -20,9 +23,10 @@ authRouter.post(
   signInHandler
 );
 
-authRouter.get(`${namespace}/test`, checkAuth, (req, res) => {
-  console.log(req.user);
-  res.json({
-    status: "ok",
-  });
-});
+authRouter.post(
+  `{namespace}/create-doctor`,
+  checkAuth,
+  createPermissionsValidator([PermissionName.editUsers]),
+  createRequestValidator(registerSchema),
+  createDoctorHandler
+)

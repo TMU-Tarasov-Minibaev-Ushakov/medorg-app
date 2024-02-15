@@ -1,12 +1,10 @@
 import httpServer from "express";
-import { getUsers, getUser } from "./db/user";
 import { authRouter } from "./routes/auth/auth.router";
 import { env } from "./env";
-import { createPermissionsValidator } from "./helpers/createPermissionsValidator";
-import { PermissionName } from "./constants";
 import cors from "cors";
 import { authMiddleware } from "./middlewares/auth.middleware";
 import { mlRouter } from "./routes/ml/ml.router";
+import {usersRouter} from "./routes/users/users.router";
 
 const server = httpServer();
 
@@ -33,25 +31,12 @@ server.use(authMiddleware);
 // })
 server.use(authRouter);
 server.use(mlRouter);
+server.use('/users', usersRouter);
 
 server.get("/ping", (req, res) => {
   res.send("pong!");
 });
 
-server.get(
-  "/users",
-  createPermissionsValidator([PermissionName.viewUsers]),
-  async (req, res) => {
-    const users = await getUsers();
-    res.json(users);
-  }
-);
-
-server.get("/user/:id", async (req, res) => {
-  const id = parseInt(req.params.id);
-  const user = await getUser(id);
-  res.json(user);
-});
 
 server.listen(env.SERVER_PORT, () => {
   console.log(
