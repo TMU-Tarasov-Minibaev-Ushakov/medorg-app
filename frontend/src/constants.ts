@@ -11,3 +11,12 @@ export const DEFAULT_THEME = {
 };
 export const APP_NAME = "Medorg App";
 export const ORGANIZATION_NAME = "TMU Students Group"
+
+export enum Permission {
+  viewPermissionGroups = 'viewPermissionGroups',
+  editPermissionGroups = 'editPermissionGroups',
+  viewPermissions = 'viewPermissions',
+  editPermissions = 'editPermissions',
+  viewUsers = 'viewUsers',
+  editUsers = 'editUsers',
+}

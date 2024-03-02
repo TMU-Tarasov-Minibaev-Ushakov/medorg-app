@@ -1,47 +1,44 @@
-import React, { useState } from "react";
-import { Button, Flex, Form, Input, Space, notification } from "antd";
-import {
-  EyeInvisibleOutlined,
-  EyeTwoTone,
-  KeyOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import React, {useState} from "react";
+import {EyeInvisibleOutlined, EyeTwoTone, KeyOutlined, UserOutlined} from "@ant-design/icons";
+import {Button, Flex, Form, Input, notification, Space} from "antd";
+import {useNavigate} from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
+import {signUp, SignUpInput} from "../../api/auth/signUp";
 
-import { SignInInput, signIn } from "../../api/auth/signIn";
+import {AuthLayout} from "./components/AuthLayout/AuthLayout";
+import {FormContainer} from "./components/AuthLayout/FormContainer";
 
-import { AuthLayout } from "./components/AuthLayout/AuthLayout";
-import { FormContainer } from "./components/AuthLayout/FormContainer";
-
-export const SignInPage = () => {
+export const CreateDoctorPage = () => {
   const navigate = useNavigate();
-  const [notificationApi, notificationContextHolder] = notification.useNotification();
+  const [api, contextHolder] = notification.useNotification();
   const [backendValidationErrors, setBackendValidationErrors] =
     useState<Record<string, string | undefined>>({});
 
-  const onSubmit = async (values: SignInInput) => {
+  const onSubmit = async (values: SignUpInput) => {
     localStorage.removeItem('authToken');
     try {
       setBackendValidationErrors({});
-      const response = await signIn(values);
+      const response = await signUp(values);
 
       console.log(response)
 
-      if (response.token) {
-        localStorage.setItem('authToken', response.token);
-        return navigate('/');
+      if (response.createdUser) {
+        api.info({
+          message: 'User successfully created',
+          description: 'Now they can log in using the credentials'
+        })
+        return navigate('/users');
       }
 
       if (!response.error) {
-        return notificationApi.error({
+        return api.error({
           message: 'Something went wrong!',
           description: 'Unexpected error occurred, please try again',
         });
       }
 
       if (!response.error.data) {
-        return notificationApi.error({
+        return api.error({
           message: response.error.message,
         });
       }
@@ -49,13 +46,12 @@ export const SignInPage = () => {
       const newValidationErrors: Record<string, string | undefined> = {};
       response.error.data.errors.forEach((er) => {
         const errorField = er.path[er.path.length - 1];
-        const errorMessage = er.message;
-        newValidationErrors[errorField] = errorMessage;
+        newValidationErrors[errorField] = er.message;
       });
       setBackendValidationErrors(newValidationErrors);
 
     } catch (error) {
-      notificationApi.error({
+      api.error({
         message: 'Something went wrong!',
         description: 'Unexpected error occurred, please try again',
       });
@@ -64,8 +60,8 @@ export const SignInPage = () => {
 
   return (
     <AuthLayout>
-      { notificationContextHolder }
-      <FormContainer title="Sign in">
+      { contextHolder }
+      <FormContainer title="Create a doctor's account">
         <Form name="basic" onFinish={onSubmit}>
           <Space direction="vertical" size={"middle"} style={{ width: "100%" }}>
             <div>
@@ -99,8 +95,8 @@ export const SignInPage = () => {
               </Form.Item>
             </div>
             <Flex gap="small" wrap="nowrap">
-              <Button size="large" style={{ flexGrow: 1 }} onClick={() => navigate('/sign-up')}>
-                I don't have an account
+              <Button size="large" style={{ flexGrow: 1 }} onClick={() => navigate('/sign-in')}>
+                I have an account
               </Button>
               <Button
                 htmlType="submit"
@@ -108,7 +104,7 @@ export const SignInPage = () => {
                 type="primary"
                 style={{ flexGrow: 1 }}
               >
-                Log in
+                Create account
               </Button>
             </Flex>
           </Space>

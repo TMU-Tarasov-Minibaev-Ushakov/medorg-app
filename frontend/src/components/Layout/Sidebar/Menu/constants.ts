@@ -3,11 +3,11 @@ import {CloudOutlined, HomeOutlined} from "@ant-design/icons";
 
 
 export const menuItems = [
-    {
-        key: '/',
-        icon: React.createElement(HomeOutlined),
-        label: 'Home',
-    },
+    // {
+    //     key: '/',
+    //     icon: React.createElement(HomeOutlined),
+    //     label: 'Home',
+    // },
     {
         key: '/x-ray',
         icon: React.createElement(CloudOutlined),
