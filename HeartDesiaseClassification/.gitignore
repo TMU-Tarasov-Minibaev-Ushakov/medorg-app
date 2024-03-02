@@ -44,3 +44,7 @@ venv.bak/
 
 # data path
 data/
+
+encoders/
+
+models/
