@@ -5,6 +5,7 @@ import cors from "cors";
 import { authMiddleware } from "./middlewares/auth.middleware";
 import { mlRouter } from "./routes/ml/ml.router";
 import {usersRouter} from "./routes/users/users.router";
+import {appointmentsRouter} from "./routes/appointments/appointments.router";
 
 const server = httpServer();
 
@@ -25,13 +26,10 @@ server.use(
 // set user object to request
 server.use(authMiddleware);
 
-// app.use((req, res, next) => {
-//   console.log(req)
-//   next()
-// })
 server.use(authRouter);
 server.use(mlRouter);
 server.use('/users', usersRouter);
+server.use('/appointments', appointmentsRouter);
 
 server.get("/ping", (req, res) => {
   res.send("pong!");
