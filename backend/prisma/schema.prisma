@@ -58,7 +58,7 @@ model Appointment {
   patient   Patient @relation(fields: [patientId], references: [id])
   doctorId  Int
   doctor    Doctor  @relation(fields: [doctorId], references: [id])
-  date      String
+  date      DateTime
   hour      Int
   status    String
 }

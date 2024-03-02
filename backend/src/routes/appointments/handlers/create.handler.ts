@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
 import { handleErrorAndRespond } from "../../../helpers/handleErrorAndResponde";
 import {createAppointment} from "../../../db/appointment/createAppointment";
+import {findAppointment} from "../../../db/appointment/findAppointment";
 
 export async function createAppointmentHandler(req: Request, res: Response) {
     try {
-        const patientId = req.body.patientId as number;
-        const doctorId = req.body.doctorId as number;
+        const patientId = parseInt(req.body.patientId);
+        const doctorId = parseInt(req.body.doctorId);
         const dateString = req.body.date as string;
-        const hour = req.body.hour as number;
+        const hour = parseInt(req.body.hour);
 
         // create Date object from consts date and hour
         const date = new Date(dateString);
@@ -21,12 +22,26 @@ export async function createAppointmentHandler(req: Request, res: Response) {
             })
         }
 
-        return await createAppointment({
+        // check if appointment with the same date and hour already exists
+        const appointment = await findAppointment({ date: new Date(dateString), hour, doctorId });
+        console.log('appointment', appointment)
+        if (appointment) {
+            return res.status(400).json({
+                message: "Appointment with the same date and hour already exists"
+            })
+        }
+
+        const createdAppointment = await createAppointment({
             patientId,
             doctorId,
             date: dateString,
             hour
         })
+        console.log('createdAppointment', createdAppointment)
+
+        res.status(200).json({
+            createdAppointment
+        });
     } catch (error) {
         handleErrorAndRespond(error, res);
     }
