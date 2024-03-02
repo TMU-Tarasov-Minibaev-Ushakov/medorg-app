@@ -1,14 +1,14 @@
 import {prisma} from "../index";
 
 type GetAppointmentsByUserIdInput = {
-    userId: number;
+    patientId: number;
     fromDate?: Date;
     toDate?: Date;
 };
-export async function getAppointmentsByUserId({ userId, fromDate, toDate }: GetAppointmentsByUserIdInput) {
+export async function getAppointmentsByUserId({ patientId, fromDate, toDate }: GetAppointmentsByUserIdInput) {
     return prisma.appointment.findMany({
         where: {
-            patientId: userId,
+            patientId,
             date: {
                 gte: fromDate?.toISOString(),
                 lte: toDate?.toISOString()
