@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { UserOutlined, EyeTwoTone, EyeInvisibleOutlined, KeyOutlined } from "@ant-design/icons";
-import { notification, Space, Input, Flex, Button, Form } from "antd";
+import { Space, Input, Flex, Button, Form } from "antd";
 import { useNavigate } from "react-router-dom";
 
 import { SignUpInput, signUp } from "../../api/auth/signUp";
 
 import { AuthLayout } from "./components/AuthLayout/AuthLayout";
 import { FormContainer } from "./components/AuthLayout/FormContainer";
+import {useNotifications} from "../../contexts/NotificationsContext";
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
-  const [api, contextHolder] = notification.useNotification();
+  const { api } = useNotifications();
   const [backendValidationErrors, setBackendValidationErrors] =
     useState<Record<string, string | undefined>>({});
 
@@ -23,7 +24,7 @@ export const SignUpPage = () => {
       console.log(response)
 
       if (response.createdUser) {
-        api.info({
+        api?.info({
           message: 'User successfully created',
           description: 'Now you can log in using your credentials'
         })
@@ -31,14 +32,14 @@ export const SignUpPage = () => {
       }
 
       if (!response.error) {
-        return api.error({
+        return api?.error({
           message: 'Something went wrong!',
           description: 'Unexpected error occurred, please try again',
         });
       }
 
       if (!response.error.data) {
-        return api.error({
+        return api?.error({
           message: response.error.message,
         });
       }
@@ -52,7 +53,7 @@ export const SignUpPage = () => {
       setBackendValidationErrors(newValidationErrors);
 
     } catch (error) {
-      api.error({
+      api?.error({
         message: 'Something went wrong!',
         description: 'Unexpected error occurred, please try again',
       });
@@ -61,7 +62,6 @@ export const SignUpPage = () => {
 
   return (
     <AuthLayout>
-      { contextHolder }
       <FormContainer title="Create an account">
         <Form name="basic" onFinish={onSubmit}>
           <Space direction="vertical" size={"middle"} style={{ width: "100%" }}>

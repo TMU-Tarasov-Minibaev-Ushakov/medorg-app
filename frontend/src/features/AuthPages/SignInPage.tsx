@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Flex, Form, Input, Space, notification } from "antd";
+import { Button, Flex, Form, Input, Space } from "antd";
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
@@ -13,10 +13,11 @@ import { SignInInput, signIn } from "../../api/auth/signIn";
 
 import { AuthLayout } from "./components/AuthLayout/AuthLayout";
 import { FormContainer } from "./components/AuthLayout/FormContainer";
+import {useNotifications} from "../../contexts/NotificationsContext";
 
 export const SignInPage = () => {
   const navigate = useNavigate();
-  const [notificationApi, notificationContextHolder] = notification.useNotification();
+  const {api} = useNotifications()
   const [backendValidationErrors, setBackendValidationErrors] =
     useState<Record<string, string | undefined>>({});
 
@@ -34,14 +35,14 @@ export const SignInPage = () => {
       }
 
       if (!response.error) {
-        return notificationApi.error({
+        return api?.error({
           message: 'Something went wrong!',
           description: 'Unexpected error occurred, please try again',
         });
       }
 
       if (!response.error.data) {
-        return notificationApi.error({
+        return api?.error({
           message: response.error.message,
         });
       }
@@ -55,7 +56,7 @@ export const SignInPage = () => {
       setBackendValidationErrors(newValidationErrors);
 
     } catch (error) {
-      notificationApi.error({
+      api?.error({
         message: 'Something went wrong!',
         description: 'Unexpected error occurred, please try again',
       });
@@ -64,7 +65,6 @@ export const SignInPage = () => {
 
   return (
     <AuthLayout>
-      { notificationContextHolder }
       <FormContainer title="Sign in">
         <Form name="basic" onFinish={onSubmit}>
           <Space direction="vertical" size={"middle"} style={{ width: "100%" }}>

@@ -24,7 +24,7 @@ authRouter.post(
 );
 
 authRouter.post(
-  `{namespace}/create-doctor`,
+  `${namespace}/create-doctor`,
   checkAuth,
   createPermissionsValidator([PermissionName.editUsers]),
   createRequestValidator(registerSchema),

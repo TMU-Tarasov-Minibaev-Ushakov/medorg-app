@@ -7,23 +7,24 @@ import {signUp, SignUpInput} from "../../api/auth/signUp";
 
 import {AuthLayout} from "./components/AuthLayout/AuthLayout";
 import {FormContainer} from "./components/AuthLayout/FormContainer";
+import {useNotifications} from "../../contexts/NotificationsContext";
+import {createDoctor} from "../../api/auth/createDoctor";
 
 export const CreateDoctorPage = () => {
   const navigate = useNavigate();
-  const [api, contextHolder] = notification.useNotification();
+  const { api } = useNotifications();
   const [backendValidationErrors, setBackendValidationErrors] =
     useState<Record<string, string | undefined>>({});
 
   const onSubmit = async (values: SignUpInput) => {
-    localStorage.removeItem('authToken');
     try {
       setBackendValidationErrors({});
-      const response = await signUp(values);
+      const response = await createDoctor(values);
 
       console.log(response)
 
       if (response.createdUser) {
-        api.info({
+        api?.info({
           message: 'User successfully created',
           description: 'Now they can log in using the credentials'
         })
@@ -31,14 +32,14 @@ export const CreateDoctorPage = () => {
       }
 
       if (!response.error) {
-        return api.error({
+        return api?.error({
           message: 'Something went wrong!',
           description: 'Unexpected error occurred, please try again',
         });
       }
 
       if (!response.error.data) {
-        return api.error({
+        return api?.error({
           message: response.error.message,
         });
       }
@@ -51,7 +52,7 @@ export const CreateDoctorPage = () => {
       setBackendValidationErrors(newValidationErrors);
 
     } catch (error) {
-      api.error({
+      api?.error({
         message: 'Something went wrong!',
         description: 'Unexpected error occurred, please try again',
       });
@@ -60,7 +61,6 @@ export const CreateDoctorPage = () => {
 
   return (
     <AuthLayout>
-      { contextHolder }
       <FormContainer title="Create a doctor's account">
         <Form name="basic" onFinish={onSubmit}>
           <Space direction="vertical" size={"middle"} style={{ width: "100%" }}>
