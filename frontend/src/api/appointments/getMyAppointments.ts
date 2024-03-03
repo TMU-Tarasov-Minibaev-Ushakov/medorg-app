@@ -1,4 +1,5 @@
 import {client} from "../client";
+import queryString from 'query-string';
 
 export type Appointment = {
   id: number,
@@ -16,8 +17,17 @@ export type Appointment = {
   }
 }
 
-export const getMyAppointments = async () => {
+type GetMyAppointmentsInput = {
+  fromDateString?: string,
+  toDateString?: string
+};
+
+export const getMyAppointments = async (params: GetMyAppointmentsInput) => {
+  const { fromDateString, toDateString } = params;
   return await client
-    .get<{ appointments: Appointment[] }>("/appointments/my-appointments")
+    .get<{ appointments: Appointment[] }>(`/appointments/my-appointments?${queryString.stringify({
+      from: fromDateString,
+      to: toDateString
+    })}`)
     .then((res) => res.data);
 }
