@@ -21,13 +21,6 @@ export const createAppointmentSchema = z.object({
                 required_error: "Doctor ID is required"
             })
             .int()
-            .positive("Doctor ID must be a positive number"),
-        patientId: z
-            .coerce
-            .number({
-                required_error: "Patient ID is required"
-            })
-            .int()
-            .positive("Patient ID must be a positive number"),
+            .positive("Doctor ID must be a positive number")
     }),
 });

@@ -1,17 +1,29 @@
-import {Card, Col, Divider, Flex, Row, Space, Typography} from "antd";
-import {useEffect, useState} from "react";
-import {getMyImagesUrls} from "../../api/ml/getMyImagesUrls";
+import {Button, Card, Col, Divider, Flex, Modal, Row, Space, Typography} from "antd";
+import {useCallback, useEffect, useState} from "react";
 import {Appointment, getMyAppointments} from "../../api/appointments/getMyAppointments";
-
-
+import {PlusOutlined} from "@ant-design/icons";
+import {getDoctorsAppointments} from "../../api/appointments/getDoctorsAppointments";
+import {CreateAppointmentWindow} from "./components/CreateAppointmentWindow";
 
 export const AppointmentsPage = () => {
 
   const [appointments, setAppointments] = useState<Appointment[]>();
-  console.log(appointments);
+  const [createAppointmentModal, setCreateAppointmentModal] = useState(false);
+
+  const openModal = useCallback(() => {
+    setCreateAppointmentModal(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setCreateAppointmentModal(false);
+  }, [])
 
   useEffect(() => {
-    getMyAppointments().then(({appointments}) => setAppointments(appointments));
+    const from = new Date();
+    from.setDate(new Date().getDate() - 1)
+    getMyAppointments({
+      fromDateString: new Date().toISOString().substring(0,10)
+    }).then(({appointments}) => setAppointments(appointments));
   }, []);
 
   if (!appointments) {
@@ -25,11 +37,6 @@ export const AppointmentsPage = () => {
     return new Date(a.date) > new Date(b.date) ? 1 : -1;
   });
 
-  // const filteredAppointments = appointments.filter(appointment => {
-  //   // date is today or in the future
-  //   return new Date(appointment.date) >= new Date();
-  // });
-
   const appointmentsByDay = sortedByDateAndHourAppointments.reduce((acc, appointment) => {
     if (!acc[appointment.date]) {
       acc[appointment.date] = [];
@@ -37,8 +44,6 @@ export const AppointmentsPage = () => {
     acc[appointment.date].push(appointment);
     return acc;
   }, {} as Record<string, any[]>);
-
-
 
   const statusToColor = (status: string) => {
     switch (status) {
@@ -52,7 +57,7 @@ export const AppointmentsPage = () => {
     }
   };
 
-  const appointmentsByDayElements = Object.entries(appointmentsByDay).map(([date, appointments]) => {
+  const appointmentsElements = Object.entries(appointmentsByDay).map(([date, appointments]) => {
     const dateWithDayOfWeek = new Date(date).toLocaleDateString('en-US', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'});
     return (
       <Space direction={'vertical'} size={6} key={date} style={{width: '100%'}}>
@@ -94,8 +99,12 @@ export const AppointmentsPage = () => {
 
   return (
     <Space direction={'vertical'} size={16} style={{width: '100%'}}>
-      <Typography.Title level={3}>My appointments</Typography.Title>
-      {appointmentsByDayElements}
+      <CreateAppointmentWindow open={createAppointmentModal} onCancel={closeModal} />
+      <Flex justify='space-between'>
+        <Typography.Title level={3}>My appointments</Typography.Title>
+        <Button icon={<PlusOutlined />} type='primary' onClick={openModal}>Create new appointment</Button>
+      </Flex>
+      {appointmentsElements}
     </Space>
   )
 };

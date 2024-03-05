@@ -5,8 +5,15 @@ import {PermissionName} from "../../constants";
 import {getUsersHandler} from "./handlers/get-users.handler";
 import {getUserHandler} from "./handlers/get-user.handler";
 import {getMyPermissionsHandler} from "./handlers/get-my-permissions.handler";
+import {getDoctorsHandler} from "./handlers/get-doctors.handler";
 
 export const usersRouter = Router();
+
+usersRouter.get(
+  '/doctors',
+  checkAuth,
+  getDoctorsHandler
+)
 
 usersRouter.get(
   '/',
