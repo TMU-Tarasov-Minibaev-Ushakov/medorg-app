@@ -8,11 +8,6 @@ declare global {
   }
 }
 
-export type RegistrationData = {
-  email: string,
-  password: string
-}
-
 export type UserFromJWT = {
   id: number,
   email: string

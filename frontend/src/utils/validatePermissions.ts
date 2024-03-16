@@ -2,8 +2,12 @@ import {getMyPermissions} from "../api/users/getMyPermissions";
 import {Permission} from "../constants";
 
 export const validatePermissions = async (requiredPermissions: Permission[]) => {
-  const usersPermissions = await getMyPermissions()
-  return requiredPermissions.every((permission) => usersPermissions.includes(permission));
+  const userPermissions = await getMyPermissions()
+  return requiredPermissions.every((permission) => userPermissions?.includes(permission));
+}
+
+export const validatePermissionsSync = (requiredPermissions: Permission[], userPermissions: Permission[]) => {
+  return requiredPermissions.every((permission) => userPermissions?.includes(permission));
 }
 
 export const createValidatePermissionsLoader = (requiredPermissions: Permission[]) => (

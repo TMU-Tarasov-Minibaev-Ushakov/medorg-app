@@ -1,7 +1,8 @@
 import {client} from "../client";
+import {Permission} from "../../constants";
 
 export const getMyPermissions = async () => {
   return await client
-    .get<string[]>("/users/my-permissions")
+    .get<Permission[]>("/users/my-permissions")
     .then((res) => res.data);
 }

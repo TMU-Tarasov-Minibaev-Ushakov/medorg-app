@@ -6,6 +6,7 @@ import {getUsersHandler} from "./handlers/get-users.handler";
 import {getUserHandler} from "./handlers/get-user.handler";
 import {getMyPermissionsHandler} from "./handlers/get-my-permissions.handler";
 import {getDoctorsHandler} from "./handlers/get-doctors.handler";
+import {getMyUserInfoHandler} from "./handlers/get-my-user-info";
 
 export const usersRouter = Router();
 
@@ -21,6 +22,12 @@ usersRouter.get(
   createPermissionsValidator([PermissionName.viewUsers]),
   getUsersHandler
 );
+
+usersRouter.get(
+  '/my-user',
+  checkAuth,
+  getMyUserInfoHandler
+)
 
 usersRouter.get(
   '/my-permissions',

@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import {Button, Form, Space, Typography, Upload} from "antd";
 import {XrayImagesList} from "./components/XrayImagesList";
 import {InboxOutlined} from "@ant-design/icons";

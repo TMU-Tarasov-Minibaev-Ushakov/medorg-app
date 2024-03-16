@@ -15,6 +15,7 @@ import {MessagesPage} from "./features/MessagesPage";
 import {AppointmentsPage} from "./features/AppointmentsPage/AppointmentsPage";
 import {CreateDoctorPage} from "./features/AuthPages/CreateDoctorPage";
 import {NotificationsProvider} from "./contexts/NotificationsContext";
+import {UserInfoProvider} from "./contexts/UserInfoContext";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         },
         {
           path: "/x-ray",
+          loader: createValidatePermissionsLoader([Permission.useXrayAnalysis]),
           element: <XRayPage />,
         },
         {
@@ -77,7 +79,9 @@ function App() {
   return (
     <div className="App">
       <NotificationsProvider>
-        <RouterProvider router={router} />
+        <UserInfoProvider>
+          <RouterProvider router={router} />
+        </UserInfoProvider>
       </NotificationsProvider>
     </div>
   );

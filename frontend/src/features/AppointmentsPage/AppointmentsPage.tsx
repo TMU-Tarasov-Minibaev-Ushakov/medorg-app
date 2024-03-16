@@ -1,8 +1,7 @@
-import {Button, Card, Col, Divider, Flex, Modal, Row, Space, Typography} from "antd";
+import {Button, Card, Col, Divider, Flex, Row, Space, Typography} from "antd";
 import {useCallback, useEffect, useState} from "react";
 import {Appointment, getMyAppointments} from "../../api/appointments/getMyAppointments";
 import {PlusOutlined} from "@ant-design/icons";
-import {getDoctorsAppointments} from "../../api/appointments/getDoctorsAppointments";
 import {CreateAppointmentWindow} from "./components/CreateAppointmentWindow";
 
 export const AppointmentsPage = () => {
