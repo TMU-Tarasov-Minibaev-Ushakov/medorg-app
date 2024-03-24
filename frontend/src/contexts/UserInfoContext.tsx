@@ -10,21 +10,20 @@ type UserInfo = {
 
 type UserInfoContextType = {
   userInfo: UserInfo,
-  fetchUserInfo: () => void
+  fetchUserInfo: () => Promise<void>
 }
 
 const userInfoContext = createContext<UserInfoContextType>({
   userInfo: null,
-  fetchUserInfo: () => {}
+  fetchUserInfo: async () => {}
 });
 
 export const UserInfoProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [userInfo, setUserInfo] = useState<UserInfo>(null);
 
-  const fetchUserInfo = useCallback(() => {
-    getMyUserInfo().then(data => {
-      setUserInfo(data);
-    });
+  const fetchUserInfo = useCallback(async () => {
+    const data = await getMyUserInfo();
+    setUserInfo(data);
   }, []);
 
   useEffect(() => {

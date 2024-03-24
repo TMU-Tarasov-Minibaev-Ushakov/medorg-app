@@ -6,7 +6,7 @@ export type Appointment = {
   date: string,
   hour: number,
   doctorId: number,
-  status: 'planned' | 'completed' | 'canceled',
+  status: 'planned' | 'completed' | 'cancelled',
   doctor: {
     id: number,
     userId: number,

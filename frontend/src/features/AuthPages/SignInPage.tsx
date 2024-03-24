@@ -14,12 +14,14 @@ import { SignInInput, signIn } from "../../api/auth/signIn";
 import { AuthLayout } from "./components/AuthLayout/AuthLayout";
 import { FormContainer } from "./components/AuthLayout/FormContainer";
 import {useNotifications} from "../../contexts/NotificationsContext";
+import {useUserInfo} from "../../contexts/UserInfoContext";
 
 export const SignInPage = () => {
   const navigate = useNavigate();
   const {api} = useNotifications()
   const [backendValidationErrors, setBackendValidationErrors] =
     useState<Record<string, string | undefined>>({});
+  const { fetchUserInfo } = useUserInfo();
 
   const onSubmit = async (values: SignInInput) => {
     localStorage.removeItem('authToken');
@@ -31,7 +33,8 @@ export const SignInPage = () => {
 
       if (response.token) {
         localStorage.setItem('authToken', response.token);
-        return navigate('/');
+        await fetchUserInfo();
+        window.location.assign('/');
       }
 
       if (!response.error) {
