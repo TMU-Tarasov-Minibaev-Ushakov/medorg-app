@@ -19,7 +19,6 @@ usersRouter.get(
 usersRouter.get(
   '/',
   checkAuth,
-  createPermissionsValidator([PermissionName.viewUsers]),
   getUsersHandler
 );
 
@@ -38,6 +37,5 @@ usersRouter.get(
 usersRouter.get(
   '/:id',
   checkAuth,
-  createPermissionsValidator([PermissionName.viewUsers]),
   getUserHandler
 );

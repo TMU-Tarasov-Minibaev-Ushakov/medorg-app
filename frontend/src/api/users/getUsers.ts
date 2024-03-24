@@ -1,8 +1,8 @@
 import {client} from "../client";
 import {User} from "../../types";
 
-export const getUserById = async (id: number) => {
+export const getUsers = async () => {
   return await client
-    .get<User>("/users/" + id)
+    .get<User[]>("/users")
     .then((res) => res.data);
 }

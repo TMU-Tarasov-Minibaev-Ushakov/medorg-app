@@ -6,32 +6,56 @@ import { authMiddleware } from "./middlewares/auth.middleware";
 import { mlRouter } from "./routes/ml/ml.router";
 import {usersRouter} from "./routes/users/users.router";
 import {appointmentsRouter} from "./routes/appointments/appointments.router";
+import {createServer} from "node:http";
+import {Server} from "socket.io";
+import {messagesRouter} from "./routes/messages/messages.router";
 
-const server = httpServer();
+const app = httpServer();
+const server =  createServer(app);
+// const io = new Server(server, {
+//   cors: {
+//     origin: '*'
+//   }
+// });
 
-server.use(
+// io.on('connection', socket => {
+//   console.log(`IO: User ${socket.id} connected`)
+//
+//   socket.on('message', data => {
+//     console.log(data)
+//     io.emit('message', `IO: From ${socket.id}: ${data}`)
+//   })
+//
+//   socket.on('disconnect', () => {
+//     console.log(`${socket.id}: disconnected`)
+//   });
+// })
+
+app.use(
   cors({
     origin: "*",
   })
 );
 // parse requests of content-type - application/json
-server.use(httpServer.json());
+app.use(httpServer.json());
 // parse requests of content-type - application/x-www-form-urlencoded
-server.use(
+app.use(
   httpServer.urlencoded({
     extended: true,
   })
 );
 
 // set user object to request
-server.use(authMiddleware);
+app.use(authMiddleware);
 
-server.use(authRouter);
-server.use(mlRouter);
-server.use('/users', usersRouter);
-server.use('/appointments', appointmentsRouter);
+app.use(authRouter);
+app.use(mlRouter);
+app.use(messagesRouter);
 
-server.get("/ping", (req, res) => {
+app.use('/users', usersRouter);
+app.use('/appointments', appointmentsRouter);
+
+app.get("/ping", (req, res) => {
   res.send("pong!");
 });
 

@@ -7,6 +7,12 @@ export enum UserType {
     ADMIN = 'ADMIN'
 }
 
+export type User = {
+    id: number,
+    email: string,
+    type: UserType
+}
+
 declare module 'styled-components' {
     export interface DefaultTheme extends GlobalToken {}
 }

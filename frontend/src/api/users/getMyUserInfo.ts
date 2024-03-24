@@ -1,14 +1,8 @@
 import {client} from "../client";
-import {UserType} from "../../types";
-
-type UserInfoResponse = {
-  id: number,
-  email: string,
-  type: UserType
-}
+import {User, UserType} from "../../types";
 
 export const getMyUserInfo = async () => {
   return await client
-    .get<UserInfoResponse>("/users/my-user")
+    .get<User>("/users/my-user")
     .then((res) => res.data);
 }
