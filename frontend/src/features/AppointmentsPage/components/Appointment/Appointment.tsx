@@ -1,13 +1,13 @@
-import {Button, Card, Col, Divider, Flex, Row, Typography} from "antd";
+import {Button, Card, Col, Divider, Flex, Typography} from "antd";
 import {Appointment} from "../../../../api/appointments/getMyAppointments";
 import {FC, useCallback} from "react";
-import {DeleteOutlined} from "@ant-design/icons";
 import {cancelAppointment} from "../../../../api/appointments/cancelAppointment";
 import {useNotifications} from "../../../../contexts/NotificationsContext";
 
 type AppointmentProps = {
   date: string,
-  appointment: Appointment
+  appointment: Appointment,
+  forDoctor: boolean
 }
 
 const statusToColor = (status: string) => {
@@ -21,7 +21,7 @@ const statusToColor = (status: string) => {
   }
 };
 
-export const AppointmentElement: FC<AppointmentProps> = ({ date, appointment }) => {
+export const AppointmentElement: FC<AppointmentProps> = ({ date, appointment, forDoctor }) => {
 
   const { api } = useNotifications();
 
@@ -63,7 +63,7 @@ export const AppointmentElement: FC<AppointmentProps> = ({ date, appointment }) 
         <Divider type={'vertical'}/>
       </Col>
       <Col style={{padding: '0 1em'}}>
-        <Typography.Text style={{fontSize: 18}}>{`Doctor_${appointment.doctorId}`}</Typography.Text>
+        <Typography.Text style={{fontSize: 18}}>{`User_${appointment.patientId}`}</Typography.Text>
       </Col>
       <Col>
         <Divider type={'vertical'}/>

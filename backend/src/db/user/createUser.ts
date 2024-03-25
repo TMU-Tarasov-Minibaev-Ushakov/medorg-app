@@ -17,6 +17,11 @@ export async function createUserWithPatient(registrationData: CreateUserInput) {
       email: registrationData.email,
       passwordHash: registrationData.passwordHash,
       type: UserType.PATIENT,
+      permissionGroups: {
+        connect: [
+          { name: 'patient' }
+        ]
+      },
       patient: {
         create: {},
       }
@@ -30,6 +35,11 @@ export async function createUserWithDoctor(registrationData: CreateUserInput) {
       email: registrationData.email,
       passwordHash: registrationData.passwordHash,
       type: UserType.DOCTOR,
+      permissionGroups: {
+        connect: [
+          { name: 'doctor' }
+        ]
+      },
       doctor: {
         create: {},
       }

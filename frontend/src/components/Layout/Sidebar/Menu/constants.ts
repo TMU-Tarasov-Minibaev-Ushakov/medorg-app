@@ -24,6 +24,13 @@ export const menuItems: MenuItemWithPermissions[] = [
         key: '/appointments',
         icon: React.createElement(CalendarOutlined),
         label: 'Appointments',
+        permissions: [Permission.viewAppointments]
+    },
+    {
+        key: '/doctors-appointments',
+        icon: React.createElement(CalendarOutlined),
+        label: 'Doctor`s appointments',
+        permissions: [Permission.viewDoctorsAppointments]
     },
     {
         key: '/messages',

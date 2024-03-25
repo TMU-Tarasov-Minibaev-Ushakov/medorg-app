@@ -16,6 +16,7 @@ import {AppointmentsPage} from "./features/AppointmentsPage/AppointmentsPage";
 import {CreateDoctorPage} from "./features/AuthPages/CreateDoctorPage";
 import {NotificationsProvider} from "./contexts/NotificationsContext";
 import {UserInfoProvider} from "./contexts/UserInfoContext";
+import {DoctorsAppointmentsPage} from "./features/DocrotsAppointmentsPage/DoctorsAppointmentsPage";
 
 
 function App() {
@@ -56,6 +57,10 @@ function App() {
         {
           path: "/appointments",
           element: <AppointmentsPage />
+        },
+        {
+          path: '/doctors-appointments',
+          element: <DoctorsAppointmentsPage />
         },
         {
           path: "/users",

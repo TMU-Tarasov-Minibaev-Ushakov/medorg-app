@@ -5,12 +5,14 @@ import {AppointmentElement} from "../Appointment/Appointment";
 
 type DayProps = {
   date: string,
-  appointments: Appointment[]
+  appointments: Appointment[],
+  forDoctor?: boolean
 }
 
 export const Day: FC<DayProps> = ({
   date,
-  appointments
+  appointments,
+  forDoctor
 }) => {
   const dateWithDayOfWeek = new Date(date).toLocaleDateString('en-US', {
     weekday: 'long',
@@ -21,7 +23,7 @@ export const Day: FC<DayProps> = ({
   return (<Space direction={'vertical'} size={6} style={{width: '100%'}}>
     <Divider plain>{dateWithDayOfWeek}</Divider>
     {appointments.map((appointment: any) => {
-      return <AppointmentElement date={date} appointment={appointment} key={appointment.date + appointment.hour} />
+      return <AppointmentElement date={date} appointment={appointment} key={appointment.date + appointment.hour} forDoctor />
     })}
   </Space>)
 }

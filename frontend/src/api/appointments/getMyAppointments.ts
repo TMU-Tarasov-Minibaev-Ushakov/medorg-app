@@ -6,8 +6,17 @@ export type Appointment = {
   date: string,
   hour: number,
   doctorId: number,
+  patientId: number,
   status: 'planned' | 'completed' | 'cancelled',
   doctor: {
+    id: number,
+    userId: number,
+    user: {
+      id: number,
+      email: string
+    }
+  },
+  patient: {
     id: number,
     userId: number,
     user: {

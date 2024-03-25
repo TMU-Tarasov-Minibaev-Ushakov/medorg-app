@@ -19,6 +19,11 @@ export async function getAppointmentsByDoctorId({ doctorId, fromDate, toDate }: 
                 include: {
                     user: true
                 }
+            },
+            patient: {
+                include: {
+                    user:true
+                }
             }
         }
     });

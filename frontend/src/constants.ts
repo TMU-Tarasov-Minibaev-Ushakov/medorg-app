@@ -20,4 +20,7 @@ export enum Permission {
   viewUsers = 'viewUsers',
   editUsers = 'editUsers',
   useXrayAnalysis = 'useXrayAnalysis',
+  viewAppointments = 'viewAppointments',
+  editAppointments = 'editAppointments',
+  viewDoctorsAppointments = 'viewDoctorsAppointments',
 }
