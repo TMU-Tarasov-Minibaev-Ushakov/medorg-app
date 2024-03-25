@@ -4,12 +4,14 @@ import {useUserInfo} from "../../../contexts/UserInfoContext";
 import {Message} from "./Message";
 import {Button, Empty, Flex, Input, Space} from "antd";
 import {sendMessage} from "../../../api/conversation/sendMessage";
+import {socket} from "../../../socket";
 
 type MessagesListProps = {
   selectedConversationId: number | null,
+  eventMessages: { senderId: number, conversationId: number, content: string, senderEmail: string, createdAt: string, id: number}[]
 }
 
-export const MessagesList: FC<MessagesListProps> = ({selectedConversationId}) => {
+export const MessagesList: FC<MessagesListProps> = ({selectedConversationId, eventMessages}) => {
 
   const { userInfo } = useUserInfo();
   const [conversation, setConversation] = useState<GetConversationsByIdResponse | null>(null);
@@ -34,14 +36,15 @@ export const MessagesList: FC<MessagesListProps> = ({selectedConversationId}) =>
     }
   }, [conversation]);
 
-  const messages = conversation?.messages?.map((message) => {
+  const allMessages = [...conversation?.messages ?? [], ...eventMessages.filter(m => m.conversationId === selectedConversationId)]
+  const messages = allMessages?.map((message, i) => {
     return (
-      <Message message={message} isOuterMessage={message.senderId !== userInfo?.id} />
+      <Message key={i} message={message} isOuterMessage={message.senderId !== userInfo?.id} />
     );
   });
 
   const handleSendMessage = async () => {
-    if (!selectedConversationId || !inputValue) {
+    if (!selectedConversationId || !inputValue || !userInfo) {
       return;
     }
     try {
@@ -55,7 +58,14 @@ export const MessagesList: FC<MessagesListProps> = ({selectedConversationId}) =>
         message: inputValue
       });
       setInputValue('');
-      window.location.reload();
+      socket.emit('clientMessage', {
+        senderId: userInfo.id,
+        conversationId: selectedConversationId,
+        content: inputValue,
+        senderEmail: userInfo.email,
+        createdAt: new Date()
+      })
+      // window.location.reload();
     } catch (e) {
       console.error(e);
     }
@@ -65,7 +75,8 @@ export const MessagesList: FC<MessagesListProps> = ({selectedConversationId}) =>
     <Flex gap={12} vertical style={{width: '100%', padding: '12px', maxHeight: '70vh', overflowY: 'scroll'}}>
       <Space ref={containerRef} direction={'vertical'} style={{
         flexGrow: 1,
-        overflowY: 'scroll'
+        overflowY: 'scroll',
+        padding: 12
       }}>
         {messages?.length ? messages : <Empty style={{marginTop: 50}}/>}
       </Space>

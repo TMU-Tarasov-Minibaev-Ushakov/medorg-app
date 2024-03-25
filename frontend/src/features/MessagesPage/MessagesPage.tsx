@@ -15,7 +15,7 @@ export const MessagesPage = () => {
     const query = new URLSearchParams(search);
 
     const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
-    const [fooEvents, setFooEvents] = useState<any>([]);
+    const [messages, setMessages] = useState<any>([]);
     const [createConversationModal, setCreateConversationModal] = useState(false);
     const [conversations, setConversations] = useState<any[]>([]);
     const [selectedConversationId, setSelectedConversationId] = useState<number | null>(parseInt(query.get('conversation') ?? ''));
@@ -26,6 +26,10 @@ export const MessagesPage = () => {
     };
 
     useEffect(() => {
+        console.log(messages)
+    }, [messages]);
+
+    useEffect(() => {
         function onConnect() {
             setIsConnected(true);
         }
@@ -34,13 +38,13 @@ export const MessagesPage = () => {
             setIsConnected(false);
         }
 
-        function onFooEvent(value: any) {
-            setFooEvents((previous: any) => [...previous, value]);
+        function onNewMessage(value: any) {
+            setMessages((previous: any) => [...previous, value]);
         }
 
         socket.on('connect', onConnect);
         socket.on('disconnect', onDisconnect);
-        socket.on('foo', onFooEvent);
+        socket.on('serverMessage', onNewMessage);
 
         async function fetchConversations() {
             try {
@@ -56,7 +60,7 @@ export const MessagesPage = () => {
         return () => {
             socket.off('connect', onConnect);
             socket.off('disconnect', onDisconnect);
-            socket.off('foo', onFooEvent);
+            socket.off('serverMessage', onNewMessage);
         };
     }, []);
 
@@ -68,7 +72,7 @@ export const MessagesPage = () => {
                 <Flex style={{ height: '100%'}}>
                     <ConversationsList conversations={conversations} selectedConversationId={selectedConversationId} onSelectConversation={onSelectConversation} />
                     <Divider type='vertical' style={{ height: 'auto', margin: 0 }}/>
-                    <MessagesList selectedConversationId={selectedConversationId} />
+                    <MessagesList selectedConversationId={selectedConversationId} eventMessages={messages} />
                 </Flex>
             </Card>
         </Space>

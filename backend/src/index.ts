@@ -12,24 +12,24 @@ import {messagesRouter} from "./routes/messages/messages.router";
 
 const app = httpServer();
 const server =  createServer(app);
-// const io = new Server(server, {
-//   cors: {
-//     origin: '*'
-//   }
-// });
+const io = new Server(server, {
+  cors: {
+    origin: '*'
+  }
+});
 
-// io.on('connection', socket => {
-//   console.log(`IO: User ${socket.id} connected`)
-//
-//   socket.on('message', data => {
-//     console.log(data)
-//     io.emit('message', `IO: From ${socket.id}: ${data}`)
-//   })
-//
-//   socket.on('disconnect', () => {
-//     console.log(`${socket.id}: disconnected`)
-//   });
-// })
+io.on('connection', socket => {
+  console.log(`IO: User ${socket.id} connected`)
+
+  socket.on('clientMessage', data => {
+    console.log(data)
+    io.emit('serverMessage', data)
+  })
+
+  socket.on('disconnect', () => {
+    console.log(`${socket.id}: disconnected`)
+  });
+})
 
 app.use(
   cors({
