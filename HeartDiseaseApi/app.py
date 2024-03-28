@@ -45,9 +45,8 @@ def application(request):
             data = request.json()
             df = pd.DataFrame(data)
 
-            df = encode(categorical_cols=categorical_cols,
-                        df=df,
-                        label_encoders=encoder)
+            for col in categorical_cols:
+                df[col] = encoder[col].transform(df[col])
             
             result = model.predict(df)
 
