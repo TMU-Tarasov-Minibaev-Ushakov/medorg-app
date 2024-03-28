@@ -16,7 +16,10 @@ loader = transforms.Compose([transforms.Resize(255),
 
 def imageLoader(image):
     img = Image.open(io.BytesIO(image)).convert("RGB")
-    img = loader(img).float()
+    np_image = np.array(img)
+    bgr_image = cv2.cvtColor(np_image, cv2.COLOR_RGB2BGR)
+    pil_image = Image.fromarray(bgr_image)
+    img = loader(pil_image).float()
     img = img.unsqueeze(0)
     return img
 
