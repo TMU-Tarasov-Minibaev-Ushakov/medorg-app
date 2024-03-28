@@ -1,24 +1,24 @@
 services:
   service1: 
     build:
-      context: .
-      target: ./xray-server
+      context: ./XRayAPI
+      target: xray-server
     stop_signal: SIGINT
     ports: 
       - '8000:8000'
 
   service2: 
     build:
-      context: .
-      target: ./heartdesiase-server
+      context: ./HeartDiseaseApi
+      target: heart-disease-server
     stop_signal: SIGINT
     ports: 
-      - '7000:7000'
+      - '8001:8001'
 
   service3: 
     build:
-      context: .
-      target: ./mri-server
+      context: ./BrainMRIAPI
+      target: mri-server
     stop_signal: SIGINT
     ports: 
       - '4000:4000'
