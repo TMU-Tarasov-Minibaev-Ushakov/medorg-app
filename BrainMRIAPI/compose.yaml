@@ -1,8 +1,0 @@
-services:
-  web: 
-    build:
-      context: .
-      target: mri-server
-    stop_signal: SIGINT
-    ports: 
-      - '4000:4000'

@@ -1,8 +1,0 @@
-services:
-  web: 
-    build:
-      context: .
-      target: heartdesiase-server
-    stop_signal: SIGINT
-    ports: 
-      - '7000:7000'
