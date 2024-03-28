@@ -2,20 +2,19 @@ import {env} from "../../../env";
 import FormData from "form-data";
 import {request} from "http";
 
-type XRayAnalysisResponse = {
-    predicted_class: string;
+type MRIAnalysisResponse = {
     processed_image: string;
 };
 
-export async function analyzeXRayImageBuffer(imageFile: Buffer) {
+export async function analyzeMRIImageBuffer(imageFile: Buffer) {
     try {
-        const analyzerUrl = env.XRAY_API_URL + "/xray";
+        const analyzerUrl = env.MRI_API_URL + "/mri";
 
         const formData = new FormData();
         formData.append("image", imageFile, "image.png");
 
         // send post request with http to analyzerUrl with formData as body
-        return await new Promise<XRayAnalysisResponse>((resolve, reject) => {
+        return await new Promise<MRIAnalysisResponse>((resolve, reject) => {
             const req = request(analyzerUrl, {
                 method: "POST",
                 headers: formData.getHeaders()

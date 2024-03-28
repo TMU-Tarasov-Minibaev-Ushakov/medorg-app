@@ -50,6 +50,7 @@ model ImageFile {
   uploadedBy       User      @relation(fields: [userId], references: [id])
   binaryData       Bytes
   messagesWithFile Message[]
+  type             String    @default("xray")
 }
 
 model Appointment {

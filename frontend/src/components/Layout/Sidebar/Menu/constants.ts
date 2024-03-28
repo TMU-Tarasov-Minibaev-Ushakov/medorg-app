@@ -5,7 +5,7 @@ import {
     MessageOutlined,
     UserAddOutlined,
     UserOutlined,
-    LogoutOutlined
+    LogoutOutlined, HeartOutlined
 } from "@ant-design/icons";
 import {MenuItemType} from "antd/es/menu/hooks/useItems";
 import {Permission} from "../../../../constants";
@@ -18,6 +18,18 @@ export const menuItems: MenuItemWithPermissions[] = [
         key: '/x-ray',
         icon: React.createElement(CloudOutlined),
         label: 'X-Ray analysis',
+        permissions: [Permission.useXrayAnalysis]
+    },
+    {
+        key: '/mri',
+        icon: React.createElement(CloudOutlined),
+        label: 'MRI analysis',
+        permissions: [Permission.useXrayAnalysis]
+    },
+    {
+        key: '/heart-disease',
+        icon: React.createElement(HeartOutlined),
+        label: 'Heart analysis',
         permissions: [Permission.useXrayAnalysis]
     },
     {

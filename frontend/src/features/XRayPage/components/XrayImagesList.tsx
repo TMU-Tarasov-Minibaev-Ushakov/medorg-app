@@ -1,7 +1,7 @@
 import {Col, Image, Modal, Row, Space} from "antd";
 import React, {useEffect, useMemo} from "react";
 import {XRayCard} from "./XRayCard";
-import {getMyImagesUrls} from "../../../api/ml/getMyImagesUrls";
+import {getMyXrayImagesUrls} from "../../../api/ml/getMyXrayImagesUrls";
 import {env} from "../../../env";
 import {AnalyzeXRayResponse} from "../../../api/ml/analyzeXRay";
 
@@ -17,7 +17,7 @@ export const XrayImagesList = () => {
     };
 
     useEffect(() => {
-        getMyImagesUrls({
+        getMyXrayImagesUrls({
             authToken: localStorage.getItem('authToken') ?? ''}
         ).then(({images}) => setImages(images));
     }, []);
@@ -33,11 +33,11 @@ export const XrayImagesList = () => {
                 {
                     analysis?.predicted_class ? (
                         <p>
-                            You are probably have a disease, please, contact your doctor for more information.
+                            This person probably has a disease.
                         </p>
                     ) : (
                         <p>
-                            The program didn't find any diseases, but you should contact your doctor for more information.
+                            The program didn't find any diseases.
                         </p>
 
                     )

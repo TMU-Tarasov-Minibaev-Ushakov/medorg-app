@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import {uploadImage} from "../../../db/imageFile/uploadImage";
 import {handleErrorAndRespond} from "../../../helpers/handleErrorAndResponde";
 import {downloadImage} from "../../../db/imageFile/downloadImage";
 

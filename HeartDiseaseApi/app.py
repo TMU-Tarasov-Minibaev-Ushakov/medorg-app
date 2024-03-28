@@ -8,9 +8,9 @@ from utils.categorical_cols import categorical_cols
 
 import joblib
 
-model = joblib.load('HeartDiseaseApi\models\KNeighborsClassifier().joblib')
+model = joblib.load('KNeighborsClassifier().joblib')
 
-encoder = joblib.load('HeartDiseaseApi\encoders\label_encoders.joblib')
+encoder = joblib.load('label_encoders.joblib')
 
 @Request.application
 def application(request):
@@ -30,19 +30,12 @@ def application(request):
             return response
         
     if request.method == 'POST':
-        if request.path == '/testpost':
-            response = Response();
-            response.headers['Access-Control-Allow-Origin'] = '*'
-            response.headers['Content-Type'] = 'text/plain'
-            response.data = json.dumps(json.loads(request.data)['image'])
-            return response
-
         if request.path == '/classify':
             response = Response()
             response.headers['Access-Control-Allow-Origin'] = '*'
             response.headers['Content-Type'] = 'application/json'
 
-            data = request.json()
+            data = request.get_json()
             df = pd.DataFrame(data)
 
             for col in categorical_cols:
@@ -64,4 +57,4 @@ def application(request):
     return response
 
 if __name__ == '__main__':
-  run_simple('127.0.0.1', 7000, application, use_debugger=True, use_reloader=True)
+  run_simple('0.0.0.0', 8001, application, use_debugger=True, use_reloader=True)

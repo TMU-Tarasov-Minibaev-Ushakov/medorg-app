@@ -39,13 +39,6 @@ def application(request):
             return response
         
     if request.method == 'POST':
-        if request.path == '/testpost':
-            response = Response();
-            response.headers['Access-Control-Allow-Origin'] = '*'
-            response.headers['Content-Type'] = 'text/plain'
-            response.data = json.dumps(json.loads(request.data)['image'])
-            return response
-
         if request.path == '/xray':
             response = Response()
             response.headers['Access-Control-Allow-Origin'] = '*'

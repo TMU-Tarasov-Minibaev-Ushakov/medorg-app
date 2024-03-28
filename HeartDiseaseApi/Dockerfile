@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4
-FROM --platform=$BUILDPLATFORM python:3.9.6-slim AS heartdesiase-server
+FROM --platform=$BUILDPLATFORM python:3.9.6-slim AS heart-disease-server
 
 WORKDIR /app
 

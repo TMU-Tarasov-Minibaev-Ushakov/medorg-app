@@ -1,6 +1,9 @@
+import {ImageFileType} from "../../types";
+
 export type UploadImageInput = {
     userId: number;
     buffer: Buffer;
+    type: ImageFileType
 }
 
 export type DeleteImageInput = {
@@ -13,4 +16,5 @@ export type DownloadImageInput = {
 
 export type GetImagesByUserIdInput = {
     userId: number;
+    type: ImageFileType
 }

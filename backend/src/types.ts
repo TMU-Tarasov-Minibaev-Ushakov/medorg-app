@@ -12,3 +12,8 @@ export type UserFromJWT = {
   id: number,
   email: string
 }
+
+export enum ImageFileType {
+  xray = 'xray',
+  mri = 'mri'
+}

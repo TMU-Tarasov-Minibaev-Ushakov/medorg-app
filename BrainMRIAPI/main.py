@@ -15,7 +15,7 @@ from get_prediction import get_prediction
 
 model = UNet()
 
-model.load_state_dict(torch.load("models/BrainMRIBest.pth", map_location='cpu'))
+model.load_state_dict(torch.load("BrainMRIBest.pth", map_location='cpu'))
 model.eval()
 
 
@@ -38,18 +38,15 @@ def application(request):
             return response
         
     if request.method == 'POST':
-        if request.path == '/testpost':
-            response = Response();
-            response.headers['Access-Control-Allow-Origin'] = '*'
-            response.headers['Content-Type'] = 'text/plain'
-            response.data = json.dumps(json.loads(request.data)['image'])
-            return response
-
         if request.path == '/mri':
             response = Response()
             response.headers['Access-Control-Allow-Origin'] = '*'
             response.headers['Content-Type'] = 'application/json'
-            img_bytes = base64.b64decode(json.loads(request.data)['image'])
+            file = request.files['image']
+            if not file:
+                response.data = json.dumps({"error": "no image"})
+                return response
+            img_bytes = file.read()
             img = imageLoader(img_bytes)
             segmented_image = get_prediction(model, img)
 
@@ -69,5 +66,5 @@ def application(request):
     return response
 
 if __name__ == '__main__':
-  run_simple('127.0.0.1', 4000, application, use_debugger=True, use_reloader=True)
+  run_simple('0.0.0.0', 4000, application, use_debugger=True, use_reloader=True)
     

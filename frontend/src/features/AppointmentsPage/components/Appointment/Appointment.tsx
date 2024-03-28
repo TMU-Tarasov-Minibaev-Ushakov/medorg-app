@@ -37,7 +37,7 @@ export const AppointmentElement: FC<AppointmentProps> = ({ date, appointment, fo
       console.log(err)
     }
 
-  }, [appointment.id])
+  }, [api, appointment.id])
 
   return (<Card key={date + appointment.hour} style={appointment.status === 'cancelled' ? {
     opacity: 0.6
@@ -63,13 +63,13 @@ export const AppointmentElement: FC<AppointmentProps> = ({ date, appointment, fo
         <Divider type={'vertical'}/>
       </Col>
       <Col style={{padding: '0 1em'}}>
-        <Typography.Text style={{fontSize: 18}}>{`User_${appointment.patientId}`}</Typography.Text>
+        <Typography.Text style={{fontSize: 18}}>{forDoctor ? `User_${appointment.patientId}` : `Doctor_${appointment.doctorId}`}</Typography.Text>
       </Col>
       <Col>
         <Divider type={'vertical'}/>
       </Col>
       <Col style={{padding: '0 1em'}}>
-        <Typography.Text style={{fontSize: 18}}>{appointment.doctor.user.email}</Typography.Text>
+        <Typography.Text style={{fontSize: 18}}>{forDoctor ? appointment.patient.user.email : appointment.doctor.user.email}</Typography.Text>
       </Col>
       { appointment.status !== 'cancelled' ?
         <Col style={{flexGrow: 1, display: 'flex', justifyContent: 'flex-end'}}>

@@ -4,8 +4,8 @@ import {AxiosResponse} from "axios";
 type GetMyImagesUrlsInput = {
     authToken: string;
 }
-export const getMyImagesUrls = async ({ authToken }: GetMyImagesUrlsInput) => {
-    return await client.get<any, AxiosResponse<{ images: { id: number, url: string }[]}>>('/ml/x-ray/my-images', {
+export const getMyMriImagesUrls = async ({ authToken }: GetMyImagesUrlsInput) => {
+    return await client.get<any, AxiosResponse<{ images: { id: number, url: string }[]}>>('/ml/mri/my-images', {
         headers: {
             "authorization": authToken
         }

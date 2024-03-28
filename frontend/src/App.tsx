@@ -17,6 +17,8 @@ import {CreateDoctorPage} from "./features/AuthPages/CreateDoctorPage";
 import {NotificationsProvider} from "./contexts/NotificationsContext";
 import {UserInfoProvider} from "./contexts/UserInfoContext";
 import {DoctorsAppointmentsPage} from "./features/DocrotsAppointmentsPage/DoctorsAppointmentsPage";
+import {MRIPage} from "./features/MRIPage/MRIPage";
+import {HeartDiseasePage} from "./features/HeartDiseasePage/HeartDiseasePage";
 
 
 function App() {
@@ -49,6 +51,16 @@ function App() {
           path: "/x-ray",
           loader: createValidatePermissionsLoader([Permission.useXrayAnalysis]),
           element: <XRayPage />,
+        },
+        {
+          path: "/mri",
+          loader: createValidatePermissionsLoader([Permission.useXrayAnalysis]),
+          element: <MRIPage />,
+        },
+        {
+          path: "/heart-disease",
+          loader: createValidatePermissionsLoader([Permission.useXrayAnalysis]),
+          element: <HeartDiseasePage />,
         },
         {
           path: "/messages",
