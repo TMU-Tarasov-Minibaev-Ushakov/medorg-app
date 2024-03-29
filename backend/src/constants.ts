@@ -5,8 +5,14 @@ export enum PermissionName {
   editPermissions = 'editPermissions',
   viewUsers = 'viewUsers',
   editUsers = 'editUsers',
+  viewAppointments = 'viewAppointments',
+  viewDoctorsAppointments = 'viewDoctorsAppointments',
+  editAppointments = 'editAppointments',
+  useXrayAnalysis = 'useXrayAnalysis',
 }
 
 export enum PermissionGroup {
-  admin = 'admin'
+  admin = 'admin',
+  doctor = 'doctor',
+  patient = 'patient',
 }

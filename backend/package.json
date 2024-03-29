@@ -9,9 +9,11 @@
     "start": "npm run build && node dist/index.js",
     "dev": "concurrently \"tsc --watch\" \"nodemon -q dist/index.js\"",
     "db:setup": "docker create --name medorg-db --env-file ./.env -p \"5432:5432\" postgres",
+    "db:migrate": "prisma migrate deploy",
     "db:start": "docker start medorg-db",
+    "db:seed": "prisma db seed",
     "db:stop": "docker stop medorg-db",
-    "prisma:studio": "prisma studio"
+    "db:studio": "prisma studio"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

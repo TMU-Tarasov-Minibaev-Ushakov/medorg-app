@@ -21,6 +21,7 @@ model User {
   id               Int               @id @default(autoincrement())
   email            String            @unique
   type             String            @default("patient")
+  name             String            @default("")
   permissionGroups PermissionGroup[]
   permissions      String[]
   passwordHash     String?

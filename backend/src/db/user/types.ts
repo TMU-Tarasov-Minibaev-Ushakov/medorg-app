@@ -2,6 +2,7 @@ import { getUser } from "./getUser";
 
 export type CreateUserInput = {
   email: string,
+  name: string,
   passwordHash: string,
   type?: UserType
 }

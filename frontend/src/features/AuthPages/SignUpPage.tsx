@@ -77,6 +77,16 @@ export const SignUpPage = () => {
                 />
               </Form.Item>
               <Form.Item<string>
+                name="name"
+                validateStatus={backendValidationErrors['name'] ? 'error' : 'validating'}
+                help={backendValidationErrors['name']}>
+                <Input
+                  size="large"
+                  placeholder="Name"
+                  prefix={<UserOutlined style={{ marginRight: "0.5em" }} />}
+                />
+              </Form.Item>
+              <Form.Item<string>
                 name="password"
                 validateStatus={backendValidationErrors['password'] ? 'error' : 'validating'}
                 help={backendValidationErrors['password']}

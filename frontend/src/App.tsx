@@ -19,16 +19,25 @@ import {UserInfoProvider} from "./contexts/UserInfoContext";
 import {DoctorsAppointmentsPage} from "./features/DocrotsAppointmentsPage/DoctorsAppointmentsPage";
 import {MRIPage} from "./features/MRIPage/MRIPage";
 import {HeartDiseasePage} from "./features/HeartDiseasePage/HeartDiseasePage";
+import {UsersPage} from "./features/UsersPage/UsersPage";
 
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/sign-in",
+      loader: () => {
+        localStorage.clear();
+        return null;
+      },
       element: <SignInPage />,
     },
     {
       path: "/sign-up",
+      loader: () => {
+        localStorage.clear();
+        return null;
+      },
       element: <SignUpPage />,
     },
     {
@@ -46,6 +55,9 @@ function App() {
         {
           path: "/",
           element: <HomePage />,
+          loader: () => {
+            return redirect('/messages')
+          }
         },
         {
           path: "/x-ray",
@@ -80,7 +92,7 @@ function App() {
           children: [
             {
               path: '/users',
-              element: <>Users</>,
+              element: <UsersPage />,
             },
             {
               path: '/users/create-doctor',

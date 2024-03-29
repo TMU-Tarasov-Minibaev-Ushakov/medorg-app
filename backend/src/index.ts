@@ -14,26 +14,25 @@ const app = httpServer();
 const server =  createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*'
+    origin: [
+      'http://localhost:3000',
+      'http://176.123.169.171:3000'
+    ]
   }
 });
 
 io.on('connection', socket => {
-  console.log(`IO: User ${socket.id} connected`)
-
   socket.on('clientMessage', data => {
-    console.log(data)
     io.emit('serverMessage', data)
   })
-
-  socket.on('disconnect', () => {
-    console.log(`${socket.id}: disconnected`)
-  });
 })
 
 app.use(
   cors({
-    origin: "*",
+    origin: [
+      'http://localhost:3000',
+      'http://176.123.169.171:3000'
+    ],
   })
 );
 // parse requests of content-type - application/json

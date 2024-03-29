@@ -8,12 +8,14 @@ export async function createDoctorHandler(req: Request, res: Response) {
     console.log(req.body.email)
     const createdUser = await createUserWithDoctor({
       email: req.body.email,
+      name: req.body.name,
       passwordHash: generatePasswordHash(req.body.password)
     });
 
     res.status(200).json({
       createdUser: {
         id: createdUser.id,
+        name: createdUser.name,
         email: createdUser.email,
       },
     });

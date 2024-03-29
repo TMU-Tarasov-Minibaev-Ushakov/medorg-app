@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import {EyeInvisibleOutlined, EyeTwoTone, KeyOutlined, UserOutlined} from "@ant-design/icons";
-import {Button, Flex, Form, Input, notification, Space} from "antd";
+import {Button, Flex, Form, Input, Space} from "antd";
 import {useNavigate} from "react-router-dom";
 
-import {signUp, SignUpInput} from "../../api/auth/signUp";
+import {SignUpInput} from "../../api/auth/signUp";
 
-import {AuthLayout} from "./components/AuthLayout/AuthLayout";
 import {FormContainer} from "./components/AuthLayout/FormContainer";
 import {useNotifications} from "../../contexts/NotificationsContext";
 import {createDoctor} from "../../api/auth/createDoctor";
@@ -60,18 +59,28 @@ export const CreateDoctorPage = () => {
   };
 
   return (
-    <AuthLayout>
+    <Flex justify="center" align="center" style={{ width: "100%", height:"100%" }}>
       <FormContainer title="Create a doctor's account">
         <Form name="basic" onFinish={onSubmit}>
           <Space direction="vertical" size={"middle"} style={{ width: "100%" }}>
             <div>
-              <Form.Item<string> 
-                name="email" 
+              <Form.Item<string>
+                name="email"
                 validateStatus={backendValidationErrors['email'] ? 'error' : 'validating'}
                 help={backendValidationErrors['email']}>
                 <Input
                   size="large"
                   placeholder="Email"
+                  prefix={<UserOutlined style={{ marginRight: "0.5em" }} />}
+                />
+              </Form.Item>
+              <Form.Item<string>
+                name="name"
+                validateStatus={backendValidationErrors['name'] ? 'error' : 'validating'}
+                help={backendValidationErrors['name']}>
+                <Input
+                  size="large"
+                  placeholder="Name"
                   prefix={<UserOutlined style={{ marginRight: "0.5em" }} />}
                 />
               </Form.Item>
@@ -110,6 +119,6 @@ export const CreateDoctorPage = () => {
           </Space>
         </Form>
       </FormContainer>
-    </AuthLayout>
+    </Flex>
   );
 };

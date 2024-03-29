@@ -8,6 +8,7 @@ export async function signUpHandler(req: Request, res: Response) {
   try {
     const createdUser = await createUserWithPatient({
       email: req.body.email,
+      name: req.body.name,
       passwordHash: generatePasswordHash(req.body.password)
     });
 
@@ -15,6 +16,7 @@ export async function signUpHandler(req: Request, res: Response) {
       createdUser: {
         id: createdUser.id,
         email: createdUser.email,
+        name: createdUser.name,
       },
     });
   } catch (error) {

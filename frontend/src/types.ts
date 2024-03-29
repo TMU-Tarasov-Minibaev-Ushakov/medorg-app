@@ -9,8 +9,11 @@ export enum UserType {
 
 export type User = {
     id: number,
+    name: string,
     email: string,
-    type: UserType
+    type: UserType,
+    permissions?: string[],
+    permissionGroups?: { name: string, permissions: string[] }[]
 }
 
 declare module 'styled-components' {

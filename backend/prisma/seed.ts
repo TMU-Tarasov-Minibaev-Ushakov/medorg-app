@@ -10,6 +10,27 @@ async function main() {
       permissions: Object.values(PermissionName)
     }
   })
+
+  await prisma.permissionGroup.create({
+    data: {
+      name: PermissionGroup.doctor,
+      permissions: [
+        PermissionName.viewDoctorsAppointments,
+        PermissionName.editAppointments,
+        PermissionName.useXrayAnalysis
+      ]
+    }
+  });
+
+  await prisma.permissionGroup.create({
+    data: {
+      name: PermissionGroup.patient,
+      permissions: [
+        PermissionName.viewAppointments,
+        PermissionName.editAppointments
+      ]
+    }
+  });
 }
 
 main()
