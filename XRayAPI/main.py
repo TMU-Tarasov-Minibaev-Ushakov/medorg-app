@@ -15,7 +15,7 @@ from layer_activation import LayerActivations
 
 model = PneumoniaResnet()
 
-model.load_state_dict(torch.load("PneumoniaResNet.pth", map_location='cpu'))
+model.load_state_dict(torch.load("./models/PneumoniaResNet.pth", map_location='cpu'))
 model.eval()
 
 acts = LayerActivations(model)
