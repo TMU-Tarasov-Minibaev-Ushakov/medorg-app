@@ -133,3 +133,7 @@ dist
 .idea/
 backend/.idea/
 frontend/.idea/
+/BrainMRIAPI/BrainMRIBest.pth
+/HeartDiseaseApi/KNeighborsClassifier().joblib
+/HeartDiseaseApi/label_encoders.joblib
+/XRayAPI/models/PneumoniaResNet.pth
