@@ -10,7 +10,7 @@ import {createServer} from "node:http";
 import {Server} from "socket.io";
 import {messagesRouter} from "./routes/messages/messages.router";
 
-//test
+// another test
 
 const app = httpServer();
 const server =  createServer(app);
