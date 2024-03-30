@@ -45,7 +45,7 @@ export const DoctorsAppointmentsPage = () => {
   }, {} as Record<string, Appointment[]>);
 
   const appointmentsElements = Object.entries(appointmentsByDay).map(([date, appointments]) => {
-    return <Day appointments={appointments} date={date} key={date} forDoctor />
+    return <Day appointments={appointments} date={date} key={date} forDoctor={true} />
   });
 
   return (

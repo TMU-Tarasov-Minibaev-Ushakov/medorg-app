@@ -63,7 +63,7 @@ export const AppointmentElement: FC<AppointmentProps> = ({ date, appointment, fo
         <Divider type={'vertical'}/>
       </Col>
       <Col style={{padding: '0 1em'}}>
-        <Typography.Text style={{fontSize: 18}}>{forDoctor ? `User_${appointment.patientId}` : `Doctor_${appointment.doctorId}`}</Typography.Text>
+        <Typography.Text style={{fontSize: 18}}>{forDoctor ? `${appointment.patient.user.name}` : `${appointment.doctor.user.name}`}</Typography.Text>
       </Col>
       <Col>
         <Divider type={'vertical'}/>

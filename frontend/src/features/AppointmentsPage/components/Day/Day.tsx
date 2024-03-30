@@ -23,7 +23,7 @@ export const Day: FC<DayProps> = ({
   return (<Space direction={'vertical'} size={6} style={{width: '100%'}}>
     <Divider plain>{dateWithDayOfWeek}</Divider>
     {appointments.map((appointment: any) => {
-      return <AppointmentElement date={date} appointment={appointment} key={appointment.date + appointment.hour} forDoctor />
+      return <AppointmentElement date={date} appointment={appointment} key={appointment.date + appointment.hour} forDoctor={!!forDoctor} />
     })}
   </Space>)
 }
