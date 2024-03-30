@@ -1,10 +1,10 @@
-import {prisma} from "../index";
+import { prisma } from "../index";
 
 type CreateMessageInput = {
-  conversationId: number,
-  senderId: number,
-  content: string
-}
+  conversationId: number;
+  senderId: number;
+  content: string;
+};
 
 export async function createMessage(input: CreateMessageInput) {
   const { conversationId, senderId, content } = input;
@@ -13,12 +13,12 @@ export async function createMessage(input: CreateMessageInput) {
     data: {
       conversation: {
         connect: {
-          id: conversationId
-        }
+          id: conversationId,
+        },
       },
       senderId: senderId,
       content: content,
-      createdAt: new Date()
-    }
+      createdAt: new Date(),
+    },
   });
 }

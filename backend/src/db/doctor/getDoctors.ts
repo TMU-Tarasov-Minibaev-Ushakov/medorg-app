@@ -1,9 +1,9 @@
-import {prisma} from "../index";
+import { prisma } from "../index";
 
 export async function getDoctors() {
   return prisma.doctor.findMany({
     include: {
-      user: true
-    }
+      user: true,
+    },
   });
-};
+}

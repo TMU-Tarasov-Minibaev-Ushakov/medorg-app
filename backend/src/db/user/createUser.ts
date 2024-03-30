@@ -1,5 +1,5 @@
-import {prisma} from "..";
-import {CreateUserInput, UserType} from "./types";
+import { prisma } from "..";
+import { CreateUserInput, UserType } from "./types";
 
 export async function createUser(registrationData: CreateUserInput) {
   return prisma.user.create({
@@ -20,13 +20,11 @@ export async function createUserWithPatient(registrationData: CreateUserInput) {
       passwordHash: registrationData.passwordHash,
       type: UserType.PATIENT,
       permissionGroups: {
-        connect: [
-          { name: 'patient' }
-        ]
+        connect: [{ name: "patient" }],
       },
       patient: {
         create: {},
-      }
+      },
     },
   });
 }
@@ -40,13 +38,11 @@ export async function createUserWithDoctor(registrationData: CreateUserInput) {
       passwordHash: registrationData.passwordHash,
       type: UserType.DOCTOR,
       permissionGroups: {
-        connect: [
-          { name: 'doctor' }
-        ]
+        connect: [{ name: "doctor" }],
       },
       doctor: {
         create: {},
-      }
+      },
     },
   });
 }

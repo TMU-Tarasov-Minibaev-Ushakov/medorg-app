@@ -1,27 +1,27 @@
-import {prisma} from "../index";
+import { prisma } from "../index";
 
 type CreateConversationInput = {
-  userId: number,
-  secondUserId: number
-}
+  userId: number;
+  secondUserId: number;
+};
 
 export async function createConversation(input: CreateConversationInput) {
-  const { userId, secondUserId} = input;
+  const { userId, secondUserId } = input;
 
-  console.log('createAppointment', input)
+  console.log("createAppointment", input);
 
   return prisma.conversation.create({
     data: {
       participants: {
         connect: [
           {
-            id: userId
+            id: userId,
           },
           {
-            id: secondUserId
-          }
-        ]
-      }
-    }
+            id: secondUserId,
+          },
+        ],
+      },
+    },
   });
 }

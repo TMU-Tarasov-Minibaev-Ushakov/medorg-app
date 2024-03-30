@@ -1,15 +1,14 @@
-import { PrismaClient } from '@prisma/client'
-import { PermissionGroup, PermissionName } from '../src/constants'
-const prisma = new PrismaClient()
+import { PrismaClient } from "@prisma/client";
+import { PermissionGroup, PermissionName } from "../src/constants";
+const prisma = new PrismaClient();
 
 async function main() {
-
   await prisma.permissionGroup.create({
     data: {
       name: PermissionGroup.admin,
-      permissions: Object.values(PermissionName)
-    }
-  })
+      permissions: Object.values(PermissionName),
+    },
+  });
 
   await prisma.permissionGroup.create({
     data: {
@@ -17,9 +16,9 @@ async function main() {
       permissions: [
         PermissionName.viewDoctorsAppointments,
         PermissionName.editAppointments,
-        PermissionName.useXrayAnalysis
-      ]
-    }
+        PermissionName.useXrayAnalysis,
+      ],
+    },
   });
 
   await prisma.permissionGroup.create({
@@ -27,18 +26,18 @@ async function main() {
       name: PermissionGroup.patient,
       permissions: [
         PermissionName.viewAppointments,
-        PermissionName.editAppointments
-      ]
-    }
+        PermissionName.editAppointments,
+      ],
+    },
   });
 }
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });

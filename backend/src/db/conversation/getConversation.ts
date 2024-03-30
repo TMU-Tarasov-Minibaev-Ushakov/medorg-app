@@ -1,19 +1,19 @@
-import {prisma} from "../index";
+import { prisma } from "../index";
 
 type GetConversationInput = {
-  conversationId: number
-}
+  conversationId: number;
+};
 
 export async function getConversation(input: GetConversationInput) {
   const { conversationId } = input;
 
   return prisma.conversation.findUnique({
     where: {
-      id: conversationId
+      id: conversationId,
     },
     include: {
       participants: true,
-      messages: true
-    }
+      messages: true,
+    },
   });
 }

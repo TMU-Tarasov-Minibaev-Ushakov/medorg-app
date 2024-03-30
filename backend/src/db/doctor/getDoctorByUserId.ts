@@ -1,12 +1,12 @@
-import {prisma} from "../index";
+import { prisma } from "../index";
 
 export async function getDoctorByUserId(userId: number) {
   return prisma.doctor.findUnique({
     where: {
-      userId: userId
+      userId: userId,
     },
     include: {
-      user: true
-    }
+      user: true,
+    },
   });
-};
+}
